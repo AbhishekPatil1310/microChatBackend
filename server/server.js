@@ -17,7 +17,7 @@ connectDB();
 const app = express();
 const server = http.createServer(app);
 
-const allowedOrigins = ["http://localhost:5173", "http://localhost:5174", "http://localhost:5175"];
+const allowedOrigins = ["http://localhost:5173", "http://localhost:5174", "http://localhost:5175","https://www.advestors.org"];
 
 app.use(cors({ origin: allowedOrigins, credentials: true }));
 app.use(express.json());
@@ -81,3 +81,4 @@ io.on("connection", (socket) => {
 
 const PORT = process.env.PORT || 4000;
 server.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
+
