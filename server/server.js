@@ -23,6 +23,10 @@ const allowedOrigins = [
   "http://localhost:5173",
   "http://localhost:5174",
   "http://localhost:5175",
+  "https://advestor-frontend-org.vercel.app",
+  "https://advestor-frontend-org-git-main-abhisheks-projects-680a2fd9.vercel.app",
+  "https://advestor-frontend-org-abhisheks-projects-680a2fd9.vercel.app"
+  
 ];
 
 // Middleware
@@ -94,4 +98,5 @@ io.on("connection", (socket) => {
 
 const PORT = process.env.PORT || 4000;
 server.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
+
 
