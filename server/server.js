@@ -23,19 +23,34 @@ const allowedOrigins = [
   "http://localhost:5173",
   "http://localhost:5174",
   "http://localhost:5175",
+  "http://127.0.0.1:5173",
+  "http://127.0.0.1:5174",
+  "http://127.0.0.1:5175",
   "https://advestor-frontend-org.vercel.app",
   "https://advestor-frontend-org-git-main-abhisheks-projects-680a2fd9.vercel.app",
   "https://advestor-frontend-org-abhisheks-projects-680a2fd9.vercel.app"
-  
 ];
 
 // Middleware
 app.use(cors({
-  origin: allowedOrigins,
+  origin: (origin, callback) => {
+    // Allow requests with no origin (like mobile apps or curl)
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
   credentials: true, // Allow cookies
 }));
 app.use(express.json());
 app.use(cookieParser());
+
+// Handle preflight requests
+app.options("*", cors({
+  origin: allowedOrigins,
+  credentials: true,
+}));
 
 // Chat API
 app.use("/api/chat", chatRoutes);
@@ -98,5 +113,3 @@ io.on("connection", (socket) => {
 
 const PORT = process.env.PORT || 4000;
 server.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
-
-
