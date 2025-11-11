@@ -7,6 +7,7 @@ export const authenticate = (req, res, next) => {
     if (!token) {
       return res.status(401).json({ message: "No token provided" });
     }
+    console.log("the tiken is: ", token);
 
     // 2️⃣ Verify token
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
@@ -22,3 +23,4 @@ export const authenticate = (req, res, next) => {
     return res.status(401).json({ message: "Unauthorized" });
   }
 };
+
